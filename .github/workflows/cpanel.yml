@@ -37,6 +37,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd "${{ secrets.SSH_TARGET }}" && find . -mindepth 1 -maxdepth 1 ! -name 'storage' ! -name '.env' -exec rm -rf {} +
 
@@ -46,6 +47,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "deploy/*"
           target: ${{ secrets.SSH_TARGET }}
           overwrite: true
@@ -62,6 +64,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: ".env"
           target: ${{ secrets.SSH_TARGET }}
           overwrite: true
@@ -86,6 +89,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: ".htaccess"
           target: ${{ secrets.SSH_TARGET }}
           overwrite: true
@@ -96,6 +100,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/php85/usr/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader'
 
   migration:
@@ -110,6 +115,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/php85/usr/bin/php artisan config:cache && /usr/php85/usr/bin/php artisan route:cache && /usr/php85/usr/bin/php artisan view:cache && /usr/php85/usr/bin/php artisan migrate --force'
 
   seeding:
@@ -125,4 +131,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/php85/usr/bin/php artisan db:seed --force'
