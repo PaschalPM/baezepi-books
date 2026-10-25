@@ -18,6 +18,11 @@ concurrency:
   group: prod/${{ github.workflow }}
   cancel-in-progress: true
 
+env:
+  # CloudLinux alt-php 8.5; dom, fileinfo and mbstring are not loaded by default
+  PHP_CLI: /opt/alt/php85/usr/bin/php -d extension=phar.so -d extension=dom.so -d extension=fileinfo.so -d extension=mbstring.so
+  COMPOSER_PHAR: /opt/alt/php85/usr/bin/composer.phar
+
 jobs:
   server-deploy:
     environment: prod
@@ -80,10 +85,6 @@ jobs:
               RewriteCond %{REQUEST_URI} !^/public/
               RewriteRule ^(.*)$ public/$1 [L]
           </IfModule>
-
-          <IfModule mime_module>
-              AddHandler application/x-httpd-ea-php85 .php .php8 .phtml
-          </IfModule>
           EOF
 
       - name: Copy .htaccess to server
@@ -106,7 +107,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/local/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader'
+          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} ${{ env.COMPOSER_PHAR }} install --no-dev --optimize-autoloader'
 
   migration:
     runs-on: ubuntu-latest
@@ -122,7 +123,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/local/bin/php artisan config:cache && /usr/local/bin/php artisan route:cache && /usr/local/bin/php artisan view:cache && /usr/local/bin/php artisan migrate --force'
+          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan config:cache && ${{ env.PHP_CLI }} artisan route:cache && ${{ env.PHP_CLI }} artisan view:cache && ${{ env.PHP_CLI }} artisan migrate --force'
 
   seeding:
     runs-on: ubuntu-latest
@@ -139,4 +140,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && /usr/local/bin/php artisan db:seed --force'
+          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan db:seed --force'
