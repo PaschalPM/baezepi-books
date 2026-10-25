@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class BookSeeder extends Seeder
@@ -17,16 +19,20 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
+        // A migration runs this seeder before later migrations add columns (e.g. price), so on
+        // a fresh database only write the columns that exist yet; those migrations fill the rest.
+        $columns = Schema::getColumnListing('books');
+
         foreach ($this->books() as $position => $book) {
             if (Book::where('slug', $book['slug'])->exists()) {
                 continue;
             }
 
-            Book::create($book + [
+            Book::create(Arr::only($book + [
                 'cover_path' => $this->cover($book['slug']),
                 'published' => true,
                 'position' => $position + 1,
-            ]);
+            ], $columns));
         }
     }
 
