@@ -19,8 +19,13 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # CloudLinux alt-php 8.5; dom, fileinfo and mbstring are not loaded by default
-  PHP_CLI: /opt/alt/php85/usr/bin/php -d extension=phar.so -d extension=dom.so -d extension=fileinfo.so -d extension=mbstring.so
+  # CloudLinux alt-php 8.5; phar, dom, fileinfo and mbstring are not loaded by default.
+  # Load them from an extra ini scan dir so child processes (composer scripts) get them too.
+  PHP_SETUP: >-
+    mkdir -p "$HOME/.php85-ext" &&
+    printf "extension=phar.so\nextension=dom.so\nextension=fileinfo.so\nextension=mbstring.so\n" > "$HOME/.php85-ext/extensions.ini" &&
+    export PHP_INI_SCAN_DIR="/opt/alt/php85/link/conf:$HOME/.php85-ext"
+  PHP_CLI: /opt/alt/php85/usr/bin/php
   COMPOSER_PHAR: /opt/alt/php85/usr/bin/composer.phar
 
 jobs:
@@ -107,7 +112,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} ${{ env.COMPOSER_PHAR }} install --no-dev --optimize-autoloader'
+          script: bash -lc '${{ env.PHP_SETUP }} && cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} ${{ env.COMPOSER_PHAR }} install --no-dev --optimize-autoloader'
 
   migration:
     runs-on: ubuntu-latest
@@ -123,7 +128,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan config:cache && ${{ env.PHP_CLI }} artisan route:cache && ${{ env.PHP_CLI }} artisan view:cache && ${{ env.PHP_CLI }} artisan migrate --force'
+          script: bash -lc '${{ env.PHP_SETUP }} && cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan config:cache && ${{ env.PHP_CLI }} artisan route:cache && ${{ env.PHP_CLI }} artisan view:cache && ${{ env.PHP_CLI }} artisan migrate --force'
 
   seeding:
     runs-on: ubuntu-latest
@@ -140,4 +145,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc 'cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan db:seed --force'
+          script: bash -lc '${{ env.PHP_SETUP }} && cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan db:seed --force'
