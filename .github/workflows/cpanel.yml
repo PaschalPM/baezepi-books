@@ -128,7 +128,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: bash -lc '${{ env.PHP_SETUP }} && cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan config:cache && ${{ env.PHP_CLI }} artisan route:cache && ${{ env.PHP_CLI }} artisan view:cache && ${{ env.PHP_CLI }} artisan migrate --force'
+          script: bash -lc '${{ env.PHP_SETUP }} && cd "${{ secrets.SSH_TARGET }}" && ${{ env.PHP_CLI }} artisan storage:link && ${{ env.PHP_CLI }} artisan config:cache && ${{ env.PHP_CLI }} artisan route:cache && ${{ env.PHP_CLI }} artisan view:cache && ${{ env.PHP_CLI }} artisan migrate --force'
 
   seeding:
     runs-on: ubuntu-latest
