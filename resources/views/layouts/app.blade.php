@@ -16,6 +16,7 @@
 <body>
     <a class="skip" href="#main">Skip to content</a>
 
+    @include('partials.admin-panel')
     @include('partials.header')
 
     <main id="main">

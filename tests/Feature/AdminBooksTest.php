@@ -37,6 +37,22 @@ class AdminBooksTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_only_signed_in_admins_see_the_admin_panel_on_the_site(): void
+    {
+        $this->get('/')->assertOk()->assertDontSee('Go to admin');
+
+        $this->actingAs(User::factory()->create())
+            ->get('/')
+            ->assertOk()
+            ->assertDontSee('Go to admin');
+
+        $this->actingAs(User::factory()->create(['name' => 'Ada Admin', 'role' => 'admin']))
+            ->get('/')
+            ->assertOk()
+            ->assertSee('Signed in as Ada Admin')
+            ->assertSee('href="'.route('admin.home').'"', false);
+    }
+
     public function test_admin_can_add_a_book_with_a_cover_and_it_appears_on_the_site(): void
     {
         Storage::fake('public');
