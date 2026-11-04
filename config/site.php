@@ -171,6 +171,9 @@ return [
         ],
     ],
 
+    // Google Analytics measurement ID (G-XXXXXXXXXX). Analytics stays off until this is set.
+    'google_analytics_id' => env('GOOGLE_ANALYTICS_ID'),
+
     /*
     | Details used by the Privacy, Terms and Cookie pages. Fill these in and
     | have the pages reviewed by a lawyer for your jurisdiction before launch.
@@ -185,7 +188,7 @@ return [
         // DMCA designated agent: register at https://www.copyright.gov/dmca-directory/
         'dmca_agent' => 'Copyright Agent',
         'dmca_email' => 'copyright@example.com',
-        'updated' => '2026-10-09',
+        'updated' => '2026-11-04',
         // COPPA threshold.
         'min_age' => 13,
         // Where newsletter addresses are stored once a provider is connected.

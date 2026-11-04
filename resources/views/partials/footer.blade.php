@@ -30,6 +30,9 @@
             <a href="{{ route('privacy') }}">Privacy</a>
             <a href="{{ route('terms') }}">Terms</a>
             <a href="{{ route('cookies') }}">Cookies</a>
+            @if (config('site.google_analytics_id') && auth()->guest())
+                <button type="button" class="cookie-settings">Cookie settings</button>
+            @endif
         </div>
     </div>
 </footer>

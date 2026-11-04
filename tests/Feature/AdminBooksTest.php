@@ -37,6 +37,21 @@ class AdminBooksTest extends TestCase
         $this->assertGuest();
     }
 
+    public function test_analytics_stays_off_until_configured_and_never_counts_signed_in_users(): void
+    {
+        $this->get('/')->assertOk()->assertDontSee('googletagmanager')->assertDontSee('Cookie settings');
+
+        config(['site.google_analytics_id' => 'G-TEST123']);
+
+        $this->get('/')->assertOk()->assertSee('G-TEST123')->assertSee('googletagmanager')->assertSee('Cookie settings');
+
+        $this->actingAs(User::factory()->create())
+            ->get('/')
+            ->assertOk()
+            ->assertDontSee('googletagmanager')
+            ->assertDontSee('Cookie settings');
+    }
+
     public function test_only_signed_in_admins_see_the_admin_panel_on_the_site(): void
     {
         $this->get('/')->assertOk()->assertDontSee('Go to admin');

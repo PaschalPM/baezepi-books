@@ -1,6 +1,6 @@
 @extends('layouts.legal', [
     'title' => 'Cookie Policy',
-    'intro' => 'We use as few cookies as possible, and only the ones the site needs to work.',
+    'intro' => 'We use the cookies the site needs to work, plus Google Analytics cookies only if you accept them.',
     'toc' => [
         'what' => 'What cookies are',
         'ours' => 'Cookies we use',
@@ -24,7 +24,7 @@
     </p>
 
     <h2 id="ours">2. Cookies we use</h2>
-    <p>This site sets only strictly necessary cookies. They are first-party, so they are set by this site and not by anyone else.</p>
+    <p>The cookies below are strictly necessary. They are first-party, so they are set by this site and not by anyone else.</p>
 
     <div class="table-wrap">
         <table>
@@ -50,34 +50,60 @@
         </table>
     </div>
 
+    <p>If you accept analytics, Google Analytics also sets these cookies on this site’s domain, so we can count visits and see which pages are read:</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>_ga</code></td>
+                    <td>Tells one browser apart from another, so repeat visits are not counted as new visitors.</td>
+                    <td>2 years</td>
+                </tr>
+                <tr>
+                    <td><code>_ga_*</code></td>
+                    <td>Keeps track of the current visit.</td>
+                    <td>2 years</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>We also save your accept or decline choice in your browser’s local storage, under <code>analytics-consent</code>, so we don’t ask on every page.</p>
+
     <h2 id="third-party">3. Third-party requests</h2>
     <p>
         Our typefaces are loaded from Google Fonts. Google Fonts does not set cookies, but your browser does send your IP
-        address to Google when it downloads the fonts. See our <a href="{{ route('privacy') }}#sharing">Privacy Policy</a> for
-        details.
+        address to Google when it downloads the fonts. If you accept analytics, your browser also sends information about your
+        visit to Google Analytics. See our <a href="{{ route('privacy') }}#sharing">Privacy Policy</a> for details.
     </p>
 
     <h2 id="not-used">4. What we don’t use</h2>
     <p>We do not use:</p>
     <ul>
-        <li>analytics or statistics cookies;</li>
         <li>advertising, retargeting or tracking pixels; or</li>
         <li>social media cookies or embedded widgets that track you.</li>
     </ul>
 
     <h2 id="consent">5. Your choices</h2>
     <p>
-        Because we use no advertising, analytics or tracking cookies, none of our cookies are used to sell or share your
-        personal information, and there is nothing to opt out of. We honor Global Privacy Control signals regardless; see our
-        <a href="{{ route('privacy') }}#signals">Privacy Policy</a>. If we ever add cookies that are not strictly necessary, we
-        will update this page and give you a way to opt out before they are used.
+        Google Analytics does not load unless you accept it in the cookie banner. You can change your mind at any time using
+        the “Cookie settings” link at the bottom of each page; if you decline, we also remove any Google Analytics cookies
+        already set. If your browser sends a Global Privacy Control signal, we treat that as a decline and do not ask. See our
+        <a href="{{ route('privacy') }}#signals">Privacy Policy</a>.
     </p>
 
     <h2 id="control">6. Managing cookies</h2>
     <p>
         You can view, block or delete cookies in your browser settings. Most browsers explain how in their help pages:
-        look for “cookies” or “site data” in the settings of Chrome, Firefox, Safari or Edge. If you block the cookies above,
-        you can still read the site, but the contact and newsletter forms will not work.
+        look for “cookies” or “site data” in the settings of Chrome, Firefox, Safari or Edge. If you block the strictly
+        necessary cookies, you can still read the site, but the contact and newsletter forms will not work.
     </p>
 
     <h2 id="changes">7. Changes</h2>

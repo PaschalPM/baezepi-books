@@ -30,7 +30,7 @@
     </p>
 
     <h2 id="what-we-collect">2. What we collect</h2>
-    <p>We keep data collection to a minimum. We do not run advertising or third-party analytics on this site.</p>
+    <p>We keep data collection to a minimum. We do not run advertising on this site, and we use Google Analytics only if you accept it.</p>
 
     <div class="table-wrap">
         <table>
@@ -57,13 +57,18 @@
                     <td>Browser type, pages requested, and the date and time of each request, recorded in server logs</td>
                     <td>Your browser</td>
                 </tr>
+                <tr>
+                    <td>Analytics (only if you accept)</td>
+                    <td>Pages viewed, how you reached the site, approximate location, device and browser details, and a cookie identifier</td>
+                    <td>Your browser, through Google Analytics</td>
+                </tr>
             </tbody>
         </table>
     </div>
     <p>
         We do not collect sensitive personal information such as Social Security numbers, financial account details, precise
-        geolocation or health information. A small number of strictly necessary cookies keep the site working; see our
-        <a href="{{ route('cookies') }}">Cookie Policy</a>.
+        geolocation or health information. A small number of strictly necessary cookies keep the site working, and analytics
+        cookies are set only if you accept them; see our <a href="{{ route('cookies') }}">Cookie Policy</a>.
     </p>
 
     <h2 id="how-we-use">3. How we use it</h2>
@@ -71,6 +76,7 @@
         <li>To send the newsletter you signed up for, including new releases and essays.</li>
         <li>To read and reply to your messages, including rights, events and order enquiries.</li>
         <li>To keep the site secure, prevent spam and fix problems.</li>
+        <li>If you accept analytics, to understand how the site is used and improve it.</li>
         <li>To comply with the law and enforce our <a href="{{ route('terms') }}">Terms of Use</a>.</li>
     </ul>
     <p>We do not use your information for targeted advertising, profiling or automated decision-making.</p>
@@ -81,6 +87,7 @@
         <li><strong>Hosting.</strong> Our web host stores the site, its database and server logs.</li>
         <li><strong>Email.</strong> Newsletter addresses are held by {{ $legal['newsletter_provider'] }}.</li>
         <li><strong>Fonts.</strong> Our typefaces are served by Google Fonts. When a page loads, your browser requests the fonts from Google, which receives your IP address under its own privacy policy.</li>
+        <li><strong>Analytics.</strong> If you accept analytics, Google Analytics, a service of Google, receives the analytics information described above. We keep Google’s advertising features turned off for it. You can withdraw consent at any time through “Cookie settings” at the bottom of each page.</li>
     </ul>
     <p>
         We may also disclose information to comply with a subpoena, court order or other legal process; to protect the rights,
@@ -96,9 +103,9 @@
 
     <h2 id="signals">6. Do Not Track and Global Privacy Control</h2>
     <p>
-        Because we do not track you across websites or sell your information, there is nothing for a Do Not Track or Global
-        Privacy Control (GPC) signal to switch off. We nonetheless treat a GPC signal as a valid request to opt out of sale and
-        sharing, as required by law.
+        We treat a Global Privacy Control (GPC) signal as a valid request to opt out of sale and sharing, as required by law,
+        and we do not load Google Analytics for a browser that sends one. We do not change how the site works in response to
+        Do Not Track signals, but analytics stays off unless you accept it.
     </p>
 
     <h2 id="retention">7. How long we keep it</h2>
@@ -107,6 +114,7 @@
         <li><strong>Correspondence:</strong> for up to two years after our last exchange, unless it relates to an ongoing agreement.</li>
         <li><strong>Server logs:</strong> for up to 90 days.</li>
         <li><strong>Session data:</strong> deleted automatically shortly after your visit ends.</li>
+        <li><strong>Analytics:</strong> up to 14 months in Google Analytics.</li>
     </ul>
 
     <h2 id="state-rights">8. Your state privacy rights</h2>
