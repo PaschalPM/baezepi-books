@@ -10,6 +10,14 @@
 |
 */
 
+// Publisher profiles, shown in the footer and on the contact page.
+$social = [
+    'Instagram' => 'https://www.instagram.com/baeze_pi',
+    'TikTok' => 'https://www.tiktok.com/@baeze.publishing',
+    'X' => 'https://x.com/baezepublishing',
+    'YouTube' => 'https://www.youtube.com/@baezepublishing',
+];
+
 return [
 
     'name' => 'Baeze Publishing',
@@ -22,11 +30,13 @@ return [
         // Put a 1200×630 image in public/images/ and set e.g. 'images/share.jpg'.
         'share_image' => null,
         // X/Twitter handle without the @, e.g. 'baezepublishing'.
-        'twitter' => null,
+        'twitter' => 'baezepublishing',
         'locale' => 'en_US',
         // Profiles that represent the publisher (Instagram, LinkedIn, etc.), used in structured data.
-        'same_as' => [],
+        'same_as' => array_values($social),
     ],
+
+    'social' => $social,
 
     'email' => 'info@baezepi.com',
     'currency_symbol' => '$',

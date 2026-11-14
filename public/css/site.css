@@ -499,6 +499,8 @@ main { overflow: hidden; }
 .contact-layout aside > div { border-bottom: 1px solid var(--line); padding: 18px 0; }
 .contact-layout aside .eyebrow { margin: 0; }
 .contact-layout aside p:last-child { margin: 6px 0 0; }
+.social-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.social-links a { padding: 6px 0; text-underline-offset: 4px; }
 .contact-link { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.3rem); line-height: 1.1; display: inline-block; text-decoration: none; white-space: nowrap; font-variation-settings: "opsz" 11; }
 .contact-layout > div > .eyebrow { margin: 0; }
 .contact-layout h2 { font-size: clamp(3.2rem, 5.5vw, 5.7rem); margin: 10px 0 30px; }
@@ -554,7 +556,7 @@ main { overflow: hidden; }
 .footer-top { max-width: 1420px; margin: auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 70px; }
 .site-footer .brand { display: block; width: 148px; filter: brightness(0) invert(1); }
 .footer-intro { max-width: 32ch; margin: 22px 0 0; color: oklch(0.77 0.025 80); }
-.footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.footer-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 30px; min-width: 0; }
 .footer-links p { color: oklch(0.75 0.09 70); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; margin-bottom: 12px; }
 .footer-links a { display: block; margin: 7px 0; }
 .footer-links a:hover { text-decoration: underline; text-decoration-color: var(--ochre); }

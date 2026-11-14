@@ -21,6 +21,14 @@
                 <p class="eyebrow">Office</p>
                 <p>{{ config('site.legal.address') }}</p>
             </div>
+            <div>
+                <p class="eyebrow">Follow</p>
+                <p class="social-links">
+                    @foreach (config('site.social') as $network => $url)
+                        <a href="{{ $url }}" target="_blank" rel="me noopener">{{ $network }}</a>
+                    @endforeach
+                </p>
+            </div>
         </aside>
 
         <div>
