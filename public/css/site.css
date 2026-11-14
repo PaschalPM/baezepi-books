@@ -500,7 +500,9 @@ main { overflow: hidden; }
 .contact-layout aside .eyebrow { margin: 0; }
 .contact-layout aside p:last-child { margin: 6px 0 0; }
 .social-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
-.social-links a { padding: 6px 0; text-underline-offset: 4px; }
+.social-links a { display: inline-flex; align-items: center; gap: 8px; padding: 6px 0; text-underline-offset: 4px; }
+.footer-social a { display: flex; align-items: center; gap: 10px; }
+.social-icon { width: 1.05em; height: 1.05em; flex: none; fill: currentColor; }
 .contact-link { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.3rem); line-height: 1.1; display: inline-block; text-decoration: none; white-space: nowrap; font-variation-settings: "opsz" 11; }
 .contact-layout > div > .eyebrow { margin: 0; }
 .contact-layout h2 { font-size: clamp(3.2rem, 5.5vw, 5.7rem); margin: 10px 0 30px; }

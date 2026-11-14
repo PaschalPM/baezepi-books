@@ -25,7 +25,7 @@
                 <p class="eyebrow">Follow</p>
                 <p class="social-links">
                     @foreach (config('site.social') as $network => $url)
-                        <a href="{{ $url }}" target="_blank" rel="me noopener">{{ $network }}</a>
+                        <a href="{{ $url }}" target="_blank" rel="me noopener">@include('partials.social-icon'){{ $network }}</a>
                     @endforeach
                 </p>
             </div>

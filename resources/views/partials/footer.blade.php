@@ -21,10 +21,10 @@
                 <a href="mailto:{{ config('site.email') }}">{{ config('site.email') }}</a>
                 <a href="tel:{{ preg_replace('/[^0-9+]/', '', config('site.phone')) }}">{{ config('site.phone') }}</a>
             </div>
-            <div>
+            <div class="footer-social">
                 <p>Follow</p>
                 @foreach (config('site.social') as $network => $url)
-                    <a href="{{ $url }}" target="_blank" rel="me noopener">{{ $network }}</a>
+                    <a href="{{ $url }}" target="_blank" rel="me noopener">@include('partials.social-icon'){{ $network }}</a>
                 @endforeach
             </div>
         </div>
